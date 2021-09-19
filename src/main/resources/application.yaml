@@ -16,6 +16,9 @@
       enabled: false
 # prod – The default profile when not running in development or test mode
 "%prod":
+  message: hello
+  environment:
+    name: production
   quarkus:
     kubernetes-config:
       enabled: false
