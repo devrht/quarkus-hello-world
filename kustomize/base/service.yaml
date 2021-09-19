@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: quarkus-helloworld
+  name: quarkus-helloworld
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+  selector:
+    app: quarkus-helloworld
+  type: ClusterIP
