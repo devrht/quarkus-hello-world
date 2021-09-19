@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: quarkus-helloworld
+  name: quarkus-helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quarkus-helloworld
+  template:
+    metadata:
+      labels:
+        app: quarkus-helloworld
+    spec:
+      containers:
+        - image: quarkus-helloworld
+          name: quarkus-helloworld
+          ports:
+            - name: http
+              containerPort: 8080
