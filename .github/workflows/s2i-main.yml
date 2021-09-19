@@ -45,7 +45,7 @@ jobs:
       - name: Push To Docker Action
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: docker-daemon:quarkus-helloworld
+          image: quarkus-helloworld
           tags: ${{ steps.build_image.outputs.tags }}
           registry: docker.io/tedwidge
           username: tedwidge
