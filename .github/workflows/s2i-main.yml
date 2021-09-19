@@ -4,7 +4,7 @@ name: CI
 
 env:
   IMAGE_NAME: quarkus-helloworld
-  TAGS: v1 ${{ github.sha }}
+  TAGS: latest
 
 # Controls when the workflow will run
 on:
@@ -38,6 +38,7 @@ jobs:
           path_context: '.'
           # Builder image for a java project
           builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
+          log_level: 5
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.TAGS }}
 
@@ -45,8 +46,8 @@ jobs:
       - name: Push To Docker Action
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: quarkus-helloworld
-          tags: ${{ steps.build_image.outputs.tags }}
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ env.TAGS }}
           registry: docker.io/tedwidge
           username: tedwidge
           password: 84c304d7-9f44-4d1a-9570-f2e892d61bf4
