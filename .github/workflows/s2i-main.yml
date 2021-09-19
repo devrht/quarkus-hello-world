@@ -47,6 +47,6 @@ jobs:
         with:
           image: ${{ steps.build_image.outputs.image }}
           tags: ${{ steps.build_image.outputs.tags }}
-          registry: tedwidge/quarkus-helloworld
+          registry: docker.io/${{ secrets.DOCKER_USERNAME }}
           #username: ${{ secrets.DOCKER_USERNAME }}
           #password: ${{ secrets.DOCKER_PASSWORD }}
