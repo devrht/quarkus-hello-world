@@ -18,10 +18,10 @@
 "%prod":
   quarkus:
     kubernetes-config:
-      enabled: true
+      enabled: false
       # list of configmaps used by the app
       # from top to bottom, less to higher priority
-      config-maps:
-        - quarkus-hello-world
-        - env-ops-quarkus-hello-world
-        - global-ops-quarkus-hello-world
+#      config-maps:
+#        - quarkus-hello-world
+#        - env-ops-quarkus-hello-world
+#        - global-ops-quarkus-hello-world
