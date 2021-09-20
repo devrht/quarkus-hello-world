@@ -6,5 +6,5 @@ resources:
 namespace: quarkus-s2i
 images:
 - name: quarkus-helloworld
-  newName: tedwidge/quarkus-helloworld
+  newName: devrht/quarkus-helloworld
   newTag: latest
