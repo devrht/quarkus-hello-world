@@ -29,17 +29,6 @@ jobs:
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Setup and Build
-      #- name: Setup and Build
-      #  id: build_image
-      #  uses: redhat-actions/s2i-build@v2
-      #  with:
-      #    path_context: '.'
-      #    # Builder image for a java project
-      #    builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
-      #    image: ${{ env.IMAGE_NAME }}
-      #    tags: ${{ env.TAGS }}
       
       - run: mvn package
       
@@ -53,6 +42,17 @@ jobs:
             target/quarkus-hello-world-quarkus-1.0.2-SNAPSHOT-runner.jar
           entrypoint: java -jar quarkus-hello-world-quarkus-1.0.2-SNAPSHOT-runner.jar
           port: 8080
+          
+       # Setup and Build
+      - name: Setup and Build
+        id: build_image
+        uses: redhat-actions/s2i-build@v2
+        with:
+          path_context: '.'
+          # Builder image for a java project
+          builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ env.TAGS }}
 
       # Push Image to Docker registry
       - name: Push To Docker Action
