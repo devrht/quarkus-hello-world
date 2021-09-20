@@ -31,23 +31,35 @@ jobs:
       - uses: actions/checkout@v2
 
       # Setup and Build
-      - name: Setup and Build
-        id: build_image
-        uses: redhat-actions/s2i-build@v2
+      #- name: Setup and Build
+      #  id: build_image
+      #  uses: redhat-actions/s2i-build@v2
+      #  with:
+      #    path_context: '.'
+      #    # Builder image for a java project
+      #    builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
+      #    image: ${{ env.IMAGE_NAME }}
+      #    tags: ${{ env.TAGS }}
+      
+      - run: mvn package
+      
+      - name: Build Image
+        uses: redhat-actions/buildah-build@v2
         with:
-          path_context: '.'
-          # Builder image for a java project
-          builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
-          log_level: 5
+          base-image: docker.io/fabric8/java-alpine-openjdk11-jre
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.TAGS }}
+          content: |
+            target/quarkus-hello-world-quarkus-1.0.2-SNAPSHOT-runner.jar
+          entrypoint: java -jar quarkus-hello-world-quarkus-1.0.2-SNAPSHOT-runner.jar
+          port: 8080
 
       # Push Image to Docker registry
       - name: Push To Docker Action
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ env.TAGS }}
+          tags: ${{ env.TAGS }}     
           registry: docker.io/tedwidge
           username: tedwidge
           password: 84c304d7-9f44-4d1a-9570-f2e892d61bf4
