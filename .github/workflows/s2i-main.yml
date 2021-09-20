@@ -29,19 +29,6 @@ jobs:
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      #- run: mvn package
-      
-      #- name: Build Image
-      #  uses: redhat-actions/buildah-build@v2
-      #  with:
-      #    base-image: docker.io/fabric8/java-alpine-openjdk11-jre
-      #    image: ${{ env.IMAGE_NAME }}
-      #    tags: ${{ env.TAGS }}
-      #    content: |
-      #      target/quarkus-hello-world-quarkus-1.0.2-SNAPSHOT-runner.jar
-      #    entrypoint: java -jar quarkus-hello-world-quarkus-1.0.2-SNAPSHOT-runner.jar
-      #    port: 8080
           
        # Setup and Build
       - name: Setup and Build
@@ -66,8 +53,8 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.TAGS }}     
-          registry: docker.io/tedwidge
-          username: tedwidge
-          password: 84c304d7-9f44-4d1a-9570-f2e892d61bf4
+          registry: quay.io/devrht
+          username: devrht
+          password: xEsXDxyg+kwumsUKJBZWRBaS+ZhslJwS0BWiEClFVqn+U30KDOfmohPZi1WBQxsZ
           #username: ${{ secrets.DOCKER_USERNAME }}
           #password: ${{ secrets.DOCKER_PASSWORD }}
